@@ -1,23 +1,53 @@
 import logo from './logo.svg';
 import './App.css';
+import Home from './components/Home';
+import Banner from './components/Banner';
+import Product from './components/Product';
+
+import {BrowserRouter,  BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Acc from './components/Acc';
+import Dress from './components/Dress';
+import Jackets from './components/Jackets';
+import Jewels from './components/Jewels';
+import Makeup from './components/Makeup';
+import Shoes from './components/Shoes';
+import Footer from './Footer';
+import Bags from './components/Bags';
+import LoginForm from './components/Login';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Contact from './components/Contact';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* <Home />
+      <Banner />
+      <Product />
+      <Footer /> */}
+
+      <BrowserRouter>
+      <Routes>
+    
+    <Route path="/" element={<Home />} />
+    <Route path="/acc" element={<Acc />} />
+    <Route path="/dress" element={<Dress />} />
+    <Route path="/jackets" element={<Jackets />} />
+    <Route path="/bags" element={<Bags />} />
+    <Route path="/jewels" element={<Jewels />} />
+    <Route path="/makeup" element={<Makeup />} />
+    <Route path="/shoe" element={<Shoes />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/signup" element={<Signup />} />
+    <Route path="/contact" element={<Contact />} />
+
+</Routes>
+      </BrowserRouter>
+
+      {/* <Login /> */}
+      {/* <Signup /> */}
+      {/* <Contact /> */}
     </div>
   );
 }
