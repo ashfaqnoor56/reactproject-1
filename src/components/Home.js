@@ -65,7 +65,7 @@ function Home() {
               <NavDropdown.Item href="./Jackets">Jack $ Coat</NavDropdown.Item>
               <NavDropdown.Item href="./Bags">Bags</NavDropdown.Item>
               <NavDropdown.Item href="./Makeup">Fair & Beauty</NavDropdown.Item>
-              <NavDropdown.Item href="./Shoes">Shoes</NavDropdown.Item>
+              <NavDropdown.Item href="./Shoe">Shoes</NavDropdown.Item>
               <NavDropdown.Divider />
              
             </NavDropdown>
@@ -189,7 +189,7 @@ function Home() {
       </SwiperSlide>
       </Col>
 
-      <Col md={2} xs={12}>
+      <Col md={2} sm={12}>
       <SwiperSlide>
       <Link to="/jewels" className='text-decoration-none text-dark'>
       <img 
@@ -203,7 +203,7 @@ function Home() {
       </SwiperSlide>
       </Col>
 
-      <Col md={2} xs={12}>
+      <Col md={2} sm={12}>
       <SwiperSlide>
       <Link to="/bags" className='text-decoration-none text-dark'>
       <img 
@@ -217,7 +217,7 @@ function Home() {
       </SwiperSlide>
       </Col>
 
-      <Col md={2} xs={12}>
+      <Col md={2} sm={12}>
       <SwiperSlide>
       <Link to="/jackets" className='text-decoration-none text-dark'>
       <img 
@@ -231,7 +231,7 @@ function Home() {
       </SwiperSlide>
       </Col>
 
-      <Col md={2} xs={12}>
+      <Col md={2} sm={12}>
       <SwiperSlide>
       <Link to="/makeup" className='text-decoration-none text-dark'>
       <img 
@@ -245,7 +245,7 @@ function Home() {
       </SwiperSlide>
       </Col>
 
-      <Col md={2} xs={12}>
+      <Col md={2} sm={12}>
       <SwiperSlide>
       <Link to="/shoe" className='text-decoration-none text-dark'>
       <img 

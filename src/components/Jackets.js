@@ -48,7 +48,7 @@ function Jackets() {
               <NavDropdown.Item href="./Jackets">Jack $ Coat</NavDropdown.Item>
               <NavDropdown.Item href="./Bags">Bags</NavDropdown.Item>
               <NavDropdown.Item href="./Makeup">Fair & Beauty</NavDropdown.Item>
-              <NavDropdown.Item href="./Shoes">Shoes</NavDropdown.Item>
+              <NavDropdown.Item href="./Shoe">Shoes</NavDropdown.Item>
               <NavDropdown.Divider />
              
             </NavDropdown>
@@ -105,7 +105,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack1} style={{height:'254px'}}/>
       <Card.Body>
-        <Card.Title className='fs-6'>Special Silk Saree</Card.Title>
+        <Card.Title className='fs-6'>Black Wollen Jacket</Card.Title>
         <Card.Text>
          $299.00
         </Card.Text>
@@ -118,7 +118,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack2} style={{height:'254px'}}/>
       <Card.Body>
-        <Card.Title className='fs-6'>Pegion White Chudi</Card.Title>
+        <Card.Title className='fs-6'>Navy Leather Jacket</Card.Title>
         <Card.Text>
          $129.29
         </Card.Text>
@@ -131,7 +131,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack3} style={{height:'254px'}} />
       <Card.Body>
-        <Card.Title className='fs-6'>Classic Party Wear</Card.Title>
+        <Card.Title className='fs-6'>Rugged Black Coat</Card.Title>
         <Card.Text>
          $399.00
         </Card.Text>
@@ -144,7 +144,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack4} style={{height:'254px'}}/>
       <Card.Body>
-        <Card.Title className='fs-6'>Imported Vintage Costume</Card.Title>
+        <Card.Title className='fs-6'>Shining Vipro Jacket</Card.Title>
         <Card.Text>
          $99.00
         </Card.Text>
@@ -159,7 +159,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack5} style={{height:'254px'}}/>
       <Card.Body>
-        <Card.Title className='fs-6'>Special Silk Saree</Card.Title>
+        <Card.Title className='fs-6'>Maroon Dark Coat</Card.Title>
         <Card.Text>
          $299.00
         </Card.Text>
@@ -172,7 +172,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack6} style={{height:'254px'}}/>
       <Card.Body>
-        <Card.Title className='fs-6'>Pegion White Chudi</Card.Title>
+        <Card.Title className='fs-6'>Toned Beige Coat</Card.Title>
         <Card.Text>
          $129.29
         </Card.Text>
@@ -185,7 +185,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack7} style={{height:'254px'}} />
       <Card.Body>
-        <Card.Title className='fs-6'>Classic Party Wear</Card.Title>
+        <Card.Title className='fs-6'>Classic Leather Coat</Card.Title>
         <Card.Text>
          $399.00
         </Card.Text>
@@ -198,7 +198,7 @@ function Jackets() {
     <Card style={{ width: '16rem', marginTop:'100px', height:'20px'}}>
       <Card.Img variant="top" src={jack8} style={{height:'254px'}}/>
       <Card.Body>
-        <Card.Title className='fs-6'>Imported Vintage Costume</Card.Title>
+        <Card.Title className='fs-6'>Helix White Jacket</Card.Title>
         <Card.Text>
          $99.00
         </Card.Text>

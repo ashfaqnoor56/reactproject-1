@@ -49,7 +49,7 @@ function Makeup() {
               <NavDropdown.Item href="./Jackets">Jack $ Coat</NavDropdown.Item>
               <NavDropdown.Item href="./Bags">Bags</NavDropdown.Item>
               <NavDropdown.Item href="./Makeup">Fair & Beauty</NavDropdown.Item>
-              <NavDropdown.Item href="./Shoes">Shoes</NavDropdown.Item>
+              <NavDropdown.Item href="./Shoe">Shoes</NavDropdown.Item>
               <NavDropdown.Divider />
              
             </NavDropdown>
