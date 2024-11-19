@@ -10,7 +10,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle signup logic here
-    console.log('Signing up with:', { username, email, password });
+    console.log('Signing up with:', { username, email, password, cpassword, number });
   };
 
   return (

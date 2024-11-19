@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Banner from './components/Banner';
 import Product from './components/Product';
 
-import {BrowserRouter,  BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Acc from './components/Acc';
 import Dress from './components/Dress';
 import Jackets from './components/Jackets';
@@ -17,7 +17,10 @@ import LoginForm from './components/Login';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Contact from './components/Contact';
-
+import Blog from './components/Error';
+import Navbarr from './components/Navbarr';
+import Swiper from './components/Swiper';
+import Error from './components/Error';
 
 function App() {
   return (
@@ -28,26 +31,31 @@ function App() {
       <Footer /> */}
 
       <BrowserRouter>
-      <Routes>
-    
-    <Route path="/" element={<Home />} />
-    <Route path="/acc" element={<Acc />} />
-    <Route path="/dress" element={<Dress />} />
-    <Route path="/jackets" element={<Jackets />} />
-    <Route path="/bags" element={<Bags />} />
-    <Route path="/jewels" element={<Jewels />} />
-    <Route path="/makeup" element={<Makeup />} />
-    <Route path="/shoe" element={<Shoes />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<Signup />} />
-    <Route path="/contact" element={<Contact />} />
 
-</Routes>
+      <Navbarr />
+      
+      
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/acc" element={<Acc />} />
+          {/* <Route path="/acc/:id" element={<Acc />} /> */}
+          <Route path="/dress" element={<Dress />} />
+          <Route path="/dress/:id" element={<Dress />} />
+          <Route path="/jackets" element={<Jackets />} />
+          <Route path="/bags" element={<Bags />} />
+          <Route path="/jewels" element={<Jewels />} />
+          <Route path="/makeup" element={<Makeup />} />
+          <Route path="/shoe" element={<Shoes />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Error />} />
+
+
+        </Routes>
       </BrowserRouter>
 
-      {/* <Login /> */}
-      {/* <Signup /> */}
-      {/* <Contact /> */}
+    
     </div>
   );
 }

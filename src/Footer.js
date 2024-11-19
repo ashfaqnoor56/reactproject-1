@@ -9,7 +9,7 @@ import { FaPinterest } from "react-icons/fa";
 function Footer() {
     return (
         <div className='bg-dark'>
-        <Container style={{marginTop:'700px'}} className='text-white pt-5 pb-5'>
+        <Container style={{marginTop:''}} className='text-white pt-5 pb-5'>
             <Row>
                 <Col md={3}>
                     <h3>Our Store</h3>
