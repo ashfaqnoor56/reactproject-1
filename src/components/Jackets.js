@@ -2,138 +2,71 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
-import { Col, Row } from 'react-bootstrap';
-import jackbanner from './images.js/jackbanner4k.jpg';
-import jack1 from './images.js/blackhoodedjacket.jpg';
-import jack2 from './images.js/redjacket.jpg';
-import jack3 from './images.js/purplehoodedjacket.jpg';
-import jack4 from './images.js/whitejacket.jpg';
-import jack5 from './images.js/greenjacket.jpg';
-import jack6 from './images.js/blackjacket.jpg';
-import jack7 from './images.js/bluedenimjacket.jpg';
-import jack8 from './images.js/darkbluedenimjacket.jpg';
-
+import { Col, NavItem, Row } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 
 function Jackets() {
+
+  const [datas, setDatas] = useState([])
+
+  let Giturl = "https://raw.githubusercontent.com/ashfaqnoor56/reactproject-1/refs/heads/main/src/components/images.js/"
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  async function GetData() {
+    let data = await axios.get("https://673c367596b8dcd5f3f8edea.mockapi.io/productapi")
+      .then(response => setDatas(response.data))
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  };
+  const handleClick = (id) => {
+    console.log(id);
+    navigate(`/showproduct/${id}`)
+  }
+
+  let filterData = datas?.filter(a => a.listingType === "jackets"); 
+  console.log(filterData);
+  
+  let bannerFilter = datas.filter(b => b.name == "jack banner")
+  console.log(bannerFilter);
   return (
     <div>
  
 <Container>
-        <img
+       {bannerFilter.map(item=>
+         <img
          style={{height:'80vh'}}
         className='w-100 d-block vh-50'
-        src={jackbanner}
+        src={Giturl + item.image}
         alt=''
         />
+       )}
         <h2 className='mt-5'><i>Winter is Coming</i></h2>
         <Row>
-    <Col md={3}>
-    <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack1} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Black Wollen Jacket</Card.Title>
-        <Card.Text>
-         $299.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack2} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Navy Leather Jacket</Card.Title>
-        <Card.Text>
-         $129.29
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack3} style={{height:'254px'}} />
-      <Card.Body>
-        <Card.Title className='fs-6'>Rugged Black Coat</Card.Title>
-        <Card.Text>
-         $399.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-    <Col md={3}>
-    <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack4} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Shining Vipro Jacket</Card.Title>
-        <Card.Text>
-         $99.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
+   {filterData.map(items=>
+     <Col md={3} onClick={() => handleClick(items.id)}>
+     <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
+       <Card.Img variant="top" src={Giturl + items.image} style={{height:'254px'}}  className='hoverimage'/>
+       <Card.Body>
+         <Card.Title className='fs-6'>{items.name}</Card.Title>
+         <Card.Text>
+          {items.price}
+         </Card.Text>
+         <Button variant="primary">Buy Now</Button>
+       </Card.Body>
+     </Card>
+     </Col>
+   )}
     </Row>
 
-    <Row style={{marginTop:'100px'}}>
-    <Col md={3}>
-    <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack5} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Maroon Dark Coat</Card.Title>
-        <Card.Text>
-         $299.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack6} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Toned Beige Coat</Card.Title>
-        <Card.Text>
-         $129.29
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack7} style={{height:'254px'}} />
-      <Card.Body>
-        <Card.Title className='fs-6'>Classic Leather Coat</Card.Title>
-        <Card.Text>
-         $399.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-    <Col md={3}>
-    <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-      <Card.Img variant="top" src={jack8} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Helix White Jacket</Card.Title>
-        <Card.Text>
-         $99.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-    </Row>
+    
     </Container>
 
     <div style={{ marginTop: '100px' }}>

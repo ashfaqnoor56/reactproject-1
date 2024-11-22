@@ -1,177 +1,163 @@
 import Container from 'react-bootstrap/Container';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import image1 from './images.js/FBIMG-2.jpg';
 import image2 from './images.js/FBIMG-6.jpg';
 import image3 from './images.js/FBIMG-5.webp';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import accessories from './images.js/ladies-accessories.jpg';
-import dress from './images.js/women dress.webp';
-import jewels from './images.js/jewels.jpg';
-import bags from './images.js/women bags.jpeg';
-import jack from './images.js/jack and coat.jpeg';
-import makeup from './images.js/women makeup.jpg';
-import shoes from './images.js/women shoes.jpeg';
 import OfferZone from './OfferZone';
 import Product from './Product';
 import Footer from '../Footer';
+import { useEffect, useState } from 'react';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 function Home() {
+
+  const [datas, setDatas] = useState([]);
+  const [count, setCount] = useState("")
+  console.log(count);
+
   const navigate = useNavigate();
 
-  // function handleClick(item) {
-  //   console.log(item);
+  function handleClick(id) {
+    console.log(id);
+    navigate(`/dress/${id}`);
+  }
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  const GetData = () => {
+    axios.get("https://673c367596b8dcd5f3f8edea.mockapi.io/productapi")
+      .then(response => setDatas(response.data))
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  // const filterData = datas?.filter((e) => e.listingType === "swiper");
+
+  const uniqueIds = new Set();
+  let filterData = datas.filter(element => {
+    const isDuplicate = uniqueIds.has(element.listingType);
+    uniqueIds.add(element.listingType);
+    return !isDuplicate;
+  });
+  filterData = filterData.filter(a => a.listingType !== 'banner')
+  filterData = filterData.filter(a => a.listingType !== 'swiper')
+  console.log(filterData);
+
+  const bannerFilter = datas.filter((banner) => banner.name == "home banner")
+  console.log(bannerFilter);
+
+
+  let Giturl = "https://raw.githubusercontent.com/ashfaqnoor56/reactproject-1/refs/heads/main/src/components/images.js/"
+
   
-  //   navigate(`/dress/${item}`);
-  // }
+  switch (count) {
+    case 0:
+      navigate("/bags")
+      break;
+    case 1:
+      navigate("/acc")
+      break;
+    case 2:
+      navigate("/dress")
+      break;
+    case 3:
+      navigate("/jewels")
+      break;
+    case 4:
+      navigate("/jackets")
+      break;
+    case 5:
+      navigate("/makeup")
+      break;
+    case 6:
+      navigate("/shoe")
+  }
+
 
   return (
     <>
-      {/* #Banner Carousel */}
-      <Container>
-        <Carousel>
+
+      <Carousel>
+        {bannerFilter.map(banner =>
           <Carousel.Item>
             <img
-              style={{ height: '80vh' }}
+              style={{ height: '100vh' }}
               className="w-100 d-block vh-50"
-              src={image1}
+              src={Giturl + banner.image}
               alt=""
             />
             <Carousel.Caption></Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item>
-            <img
-              style={{ height: '80vh' }}
-              className="w-100 d-block"
-              src={image2}
-              alt=""
-            />
-            <Carousel.Caption></Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              style={{ height: '80vh' }}
-              className="w-100 d-block"
-              src={image3}
-              alt=""
-            />
-            <Carousel.Caption></Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-      </Container>
+        )}
+      </Carousel>
 
-      {/* #Categories */}
-      <Container className="mt-5">
+
+      <Container>
         <Swiper
-          style={{ marginTop: '100px' }}
-          spaceBetween={50}
-          slidesPerView={7}
-          loop={true} 
-          
-          
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}
+          spaceBetween={30}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Autoplay]}
+          className="mySwiper"
+          breakpoints={{
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 20
+            },
+            480: {
+              slidesPerView: 3,
+              spaceBetween: 30
+            },
+            640: {
+              slidesPerView: 4,
+              spaceBetween: 40
+            },
+            992: {
+              slidesPerView: 6,
+              spaceBetween: 20
+            }
+          }}
         >
-          <SwiperSlide>
-            <Link to="/dress/1" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={accessories}
-                alt="Accessories"
-              />
-              <h6 className="text-center mt-3">Accessories</h6>
-            </Link>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Link to="/dress/2" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={dress}
-                alt="Dress"
-              />
-              <h6 className="text-center mt-3">Dress</h6>
-            </Link>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Link to="/dress/3" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={jewels}
-                alt="Jewels"
-              />
-              <h6 className="text-center mt-3">Jewels</h6>
-            </Link>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Link to="/dress/4" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={bags}
-                alt="Bags"
-              />
-              <h6 className="text-center mt-3">Bags</h6>
-            </Link>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Link to="/dress/5" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={jack}
-                alt="Jackets & Coat"
-              />
-              <h6 className="text-center mt-3">Jackets & Coat</h6>
-            </Link>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Link to="/dress/6" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={makeup}
-                alt="Makeup Set"
-              />
-              <h6 className="text-center mt-3">Makeup Set</h6>
-            </Link>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Link to="/dress/7" className="text-decoration-none text-dark">
-              <img
-                style={{ height: '200px', borderRadius: '50%' }}
-                className="w-100"
-                src={shoes}
-                alt="Shoes"
-              />
-              <h6 className="text-center mt-3">Shoes</h6>
-            </Link>
-          </SwiperSlide>
+          {
+            filterData.map((items, index) => (
+              <SwiperSlide key={index} >
+                <img
+                  onClick={() => setCount(index)}
+                  // onClick={() => handleClick(items.id)}
+                  src={Giturl + items.image}
+                  alt={items.image + index}
+                  style={{ marginTop: "50px", borderRadius: "50%", height: "200px", width: "152px", cursor: 'pointer' }}
+                />
+              </SwiperSlide>
+            ))
+          }
         </Swiper>
       </Container>
 
-      {/* #home Product */}
       <Product />
 
-      {/* #offerzone */}
       <div style={{ marginTop: '100px' }}>
         <OfferZone />
       </div>
 
-      {/* #Footer */}
       <div className="mt-5">
         <Footer />
       </div>

@@ -3,140 +3,74 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
-import shoebanner from './images.js/shoebanner.jpg';
-import shoe1 from './images.js/blackheel.jpeg';
-import walkshoe from './images.js/wshoes.jpeg';
-import heels from './images.js/synthetic heels.jpg';
-import whiteheel from './images.js/whitewear.jpeg';
-import sneaker from './images.js/white sneaker.jpeg';
-import boots from './images.js/wboots.jpeg';
-import blackshoe from './images.js/runshoe.jpeg';
-import pboots from './images.js/pinkboots.jpeg';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../Footer';
 
 
 function Shoes() {
+
+  const [datas, setDatas] = useState([])
+
+
+  let Giturl = "https://raw.githubusercontent.com/ashfaqnoor56/reactproject-1/refs/heads/main/src/components/images.js/"
+
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  async function GetData() {
+    let data = await axios.get("https://673c367596b8dcd5f3f8edea.mockapi.io/productapi")
+      .then(response => setDatas(response.data))
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  };
+  const handleClick = (id) => {
+    console.log(id);
+    navigate(`/showproduct/${id}`)
+  }
+
+ let filterData = datas?.filter(a => a.listingType === "shoes"); 
+ let bannerFilter = datas.filter(b => b.name == "shoe banner")
+  
   return (
     <div>
 
 
-      <Container>
-        <img
-          style={{ height: '80vh' }}
-          className='w-100 d-block vh-50'
-          src={shoebanner}
-          alt=''
+<Container>
+       {bannerFilter.map(item=>
+         <img
+         style={{height:'80vh'}}
+        className='w-100 d-block vh-50'
+        src={Giturl + item.image}
+        alt=''
         />
-        <h2 className='mt-5'><i>Walk Like a Queen</i></h2>
-
+       )}
+        <h2 className='mt-5'><i>Walk With Pride</i></h2>
         <Row>
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={walkshoe} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Beige Low Heel Shoe</Card.Title>
-                <Card.Text>
-                  $299.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
+   {filterData.map(items=>
+     <Col md={3} onClick={() => handleClick(items.id)}>
+     <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
+       <Card.Img variant="top" src={Giturl + items.image} style={{height:'254px'}}  className='hoverimage'/>
+       <Card.Body>
+         <Card.Title className='fs-6'>{items.name}</Card.Title>
+         <Card.Text>
+          {items.price}
+         </Card.Text>
+         <Button variant="primary">Buy Now</Button>
+       </Card.Body>
+     </Card>
+     </Col>
+   )}
+    </Row>
 
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={heels} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Black Heel Shoe</Card.Title>
-                <Card.Text>
-                  $129.29
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={pboots} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Classic Pink Boot</Card.Title>
-                <Card.Text>
-                  $399.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={whiteheel} style={{ height: '254px' , }} />
-              <Card.Body>
-                <Card.Title className='fs-6'> Vintage White Heel</Card.Title>
-                <Card.Text>
-                  $99.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row style={{ marginTop: '100px' }}>
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={sneaker} style={{ height: '254px', }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>White Premium Sneakers</Card.Title>
-                <Card.Text>
-                  $299.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-    <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={boots} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Beige Neckup Boots</Card.Title>
-                <Card.Text>
-                  $129.29
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={shoe1} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'> Party Wear Black Heel</Card.Title>
-                <Card.Text>
-                  $399.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-          <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-              <Card.Img variant="top" src={blackshoe} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Running Red Shoe</Card.Title>
-                <Card.Text>
-                  $99.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+    
+    </Container>
 
       <div style={{marginTop:'100px'}}>
         <Footer />

@@ -22,20 +22,16 @@ function Navbarr() {
               navbarScroll
             >
 
-              {/* <Nav.Link href="#" className='text-dark fs-5 '>Pages</Nav.Link>
-            <Nav.Link href="#" className='text-dark fs-5'>Blog</Nav.Link>
-            <Nav.Link href="#" className='text-dark fs-5'> Contact Us</Nav.Link> */}
-
               <Nav.Link href="/" className=''>Home</Nav.Link>
 
               <NavDropdown title="Pages" id="basic-nav-dropdown">
-                <NavDropdown.Item href="./1">Accessories</NavDropdown.Item>
-                <NavDropdown.Item href="./2">Dress</NavDropdown.Item>
-                <NavDropdown.Item href="./3">Jewels</NavDropdown.Item>
-                <NavDropdown.Item href="./4">Jack $ Coat</NavDropdown.Item>
-                <NavDropdown.Item href="./5">Bags</NavDropdown.Item>
-                <NavDropdown.Item href="./6">Fair & Beauty</NavDropdown.Item>
-                <NavDropdown.Item href="./7">Shoes</NavDropdown.Item>
+                <NavDropdown.Item href="./acc">Accessories</NavDropdown.Item>
+                <NavDropdown.Item href="./dress">Dress</NavDropdown.Item>
+                <NavDropdown.Item href="./jewels">Jewels</NavDropdown.Item>
+                <NavDropdown.Item href="./bags">Jack $ Coat</NavDropdown.Item>
+                <NavDropdown.Item href="./jackets">Bags</NavDropdown.Item>
+                <NavDropdown.Item href="./makeup">Fair & Beauty</NavDropdown.Item>
+                <NavDropdown.Item href="./shoes">Shoes</NavDropdown.Item>
                 <NavDropdown.Divider />
 
               </NavDropdown>

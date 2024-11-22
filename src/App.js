@@ -1,7 +1,7 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Home from './components/Home';
-import Banner from './components/Banner';
+
 import Product from './components/Product';
 
 import { BrowserRouter, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -19,8 +19,8 @@ import Signup from './components/Signup';
 import Contact from './components/Contact';
 import Blog from './components/Error';
 import Navbarr from './components/Navbarr';
-import Swiper from './components/Swiper';
 import Error from './components/Error';
+import ShowProduct from './components/ShowProduct';
 
 function App() {
   return (
@@ -49,6 +49,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/showproduct/:id" element={<ShowProduct />} />
           <Route path="*" element={<Error />} />
 
 

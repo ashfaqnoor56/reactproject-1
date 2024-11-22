@@ -3,140 +3,70 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
-import makeupbanner from './images.js/makeupbanner.avif';
-import nailpolish from './images.js/nailpolish.jpeg';
-import mascara from './images.js/mascara.webp';
-import eyeliner from './images.js/eyeliner.webp';
-import lipstick from './images.js/lipstick.jpg';
-import facecream from './images.js/facecream.webp';
-import facepowder from './images.js/serum1.jpeg';
-import makeupset from './images.js/brush.avif';
-import illusionpowder from './images.js/illusion powder.jpg';
-import array from './array';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Footer from '../Footer';
-
+import { useNavigate } from 'react-router-dom';
 
 function Makeup() {
+
+  const [datas, setDatas] = useState([])
+  const navigate = useNavigate()
+
+  let Giturl = "https://raw.githubusercontent.com/ashfaqnoor56/reactproject-1/refs/heads/main/src/components/images.js/"
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  async function GetData() {
+    let data = await axios.get("https://673c367596b8dcd5f3f8edea.mockapi.io/productapi")
+      .then(response => setDatas(response.data))
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const handleClick = (id) => {
+    console.log(id);
+    navigate(`/showproduct/${id}`)
+  }
+
+  let filterData = datas?.filter(a => a.listingType === "makeup"); 
+  let bannerFilter = datas.filter(b => b.name == "makeup banner")
+  
   return (
     <div>
 
-      <Container>
-        <img
-          style={{ height: '80vh' }}
-          className='w-100 d-block vh-50'
-          src={makeupbanner}
-          alt=''
+<Container>
+       {bannerFilter.map(item=>
+         <img
+         style={{height:'80vh'}}
+        className='w-100 d-block vh-50'
+        src={Giturl + item.image}
+        alt=''
         />
-        <h2 className='mt-5'><i>Beauty is Endless</i></h2>
-
+       )}
+        <h2 className='mt-5'><i>Blow and Glow</i></h2>
         <Row>
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={nailpolish} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Fancy Nail Polish</Card.Title>
-                <Card.Text>
-                  $299.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
+   {filterData.map(items=>
+     <Col md={3} onClick={() =>handleClick(items.id)}>
+     <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
+       <Card.Img variant="top" src={Giturl + items.image} style={{height:'254px'}}  className='hoverimage'/>
+       <Card.Body>
+         <Card.Title className='fs-6'>{items.name}</Card.Title>
+         <Card.Text>
+          {items.price}
+         </Card.Text>
+         <Button variant="primary">Buy Now</Button>
+       </Card.Body>
+     </Card>
+     </Col>
+   )}
+    </Row>
 
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={mascara} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Premium Black Mascara</Card.Title>
-                <Card.Text>
-                  $129.29
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={lipstick} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Lipca Red Lipstick</Card.Title>
-                <Card.Text>
-                  $399.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={eyeliner} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Hemic Black Eyeliner</Card.Title>
-                <Card.Text>
-                  $99.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
-        <Row style={{ marginTop: '100px' }}>
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={facecream} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Foundation Face Cream</Card.Title>
-                <Card.Text>
-                  $299.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={illusionpowder} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Brighten Face Powder</Card.Title>
-                <Card.Text>
-                  $129.29
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={makeupset} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Classic Makeup Brush</Card.Title>
-                <Card.Text>
-                  $399.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col md={3}>
-            <Card style={{ width: '100%', height: 'auto', marginTop: '30px' }}>
-              <Card.Img variant="top" src={facepowder} style={{ height: '254px' }} />
-              <Card.Body>
-                <Card.Title className='fs-6'>Aqua Face Serum</Card.Title>
-                <Card.Text>
-                  $99.00
-                </Card.Text>
-                <Button variant="primary">Buy Now</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+    
+    </Container>
 
       <div style={{ marginTop: '100px' }}>
         <Footer />

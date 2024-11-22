@@ -1,20 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import { Col, Row } from 'react-bootstrap';
 import bagbanner from './images.js/bag banner.webp';
-import bag1 from './images.js/bag1.jpg';
-import bag2 from './images.js/bag2.jpeg';
-import bag3 from './images.js/black bags.jpeg';
-import bag4 from './images.js/brownbag.jpeg';
-import bag5 from './images.js/redbag.jpeg';
-import bag6 from './images.js/bagrd1.jpeg';
-import bag7 from './images.js/beigebag.jpeg';
-import bag8 from './images.js/bagbl1.jpeg';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Footer from '../Footer';
 
 function Bags() {
+
+const [datas, setDatas] = useState([])
+
+  let Giturl = "https://raw.githubusercontent.com/ashfaqnoor56/reactproject-1/refs/heads/main/src/components/images.js/"
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  async function GetData() {
+    let data = await axios.get("https://673c367596b8dcd5f3f8edea.mockapi.io/productapi")
+      .then(response => setDatas(response.data))
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  };
+
+  const handleClick = (id) => {
+    console.log(id);
+    navigate(`/showproduct/${id}`)
+  }
+
+  let filterData = datas?.filter(a => a.listingType === "bags"); 
+  console.log(filterData);
+  
+  let bannerFilter = datas.filter(b => b.name == "bag banner")
+  console.log(bannerFilter);
+
+
+
   return (
     <div>
 
@@ -28,112 +54,24 @@ function Bags() {
         <h2 className='mt-5'><i>Makes You Feel Comfort</i></h2>
 
         <Row>
-    <Col md={3}>
-    <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag1} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Morias Grey Classic Bag</Card.Title>
-        <Card.Text>
-         $299.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
+   {filterData.map(items=>
+     <Col md={3} onClick={() => handleClick(items.id)}>
+     <Card style={{ width: '100%', minHeight:'411px',marginTop:'30px'}}>
+       <Card.Img variant="top" src={Giturl + items.image} style={{height:'254px'}}  className='hoverimage'/>
+       <Card.Body>
+         <Card.Title className='fs-6'>{items.name}</Card.Title>
+         <Card.Text>
+          {items.price}
+         </Card.Text>
+         <Button variant="primary">Buy Now</Button>
+       </Card.Body>
+     </Card>
+     </Col>
+   )}
 
-<Col md={3}>
-<Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag2} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Piyago Navy Casual Bag</Card.Title>
-        <Card.Text>
-         $129.29
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag3} style={{height:'254px'}} />
-      <Card.Body>
-        <Card.Title className='fs-6'>Luxury Haris Black Bag</Card.Title>
-        <Card.Text>
-         $399.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-    <Col md={3}>
-    <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag4} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Premium Leather Brown Bag</Card.Title>
-        <Card.Text>
-         $99.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
     </Row>
 
-    <Row style={{marginTop:'100px'}}>
-    <Col md={3}>
-    <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag5} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Red Sauage Nitro Bag</Card.Title>
-        <Card.Text>
-         $299.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag6} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Pegion Neck Red Bag</Card.Title>
-        <Card.Text>
-         $129.29
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-<Col md={3}>
-<Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag7} style={{height:'254px'}} />
-      <Card.Body>
-        <Card.Title className='fs-6'>Classic Biege Bag</Card.Title>
-        <Card.Text>
-         $399.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-
-    <Col md={3}>
-    <Card style={{ width: '100%', height:'auto',marginTop:'30px'}}>
-      <Card.Img variant="top" src={bag8} style={{height:'254px'}}/>
-      <Card.Body>
-        <Card.Title className='fs-6'>Imported Vintage Black Bag</Card.Title>
-        <Card.Text>
-         $99.00
-        </Card.Text>
-        <Button variant="primary">Buy Now</Button>
-      </Card.Body>
-    </Card>
-    </Col>
-    </Row>
+    
     </Container>
 
     <div style={{ marginTop: '100px' }}>
